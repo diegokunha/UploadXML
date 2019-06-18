@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta charset="utf-8" />
+<title>Insert title here</title>
+
+<style type="text/css">
+    /** Demo **/
+    .ui-outputlabel {
+        font-weight: bold;
+    }
+     
+    .ui-orderlist .ui-orderlist-list {
+        height: auto;
+    }
+    
+    .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
+    	webkit-box-shadow: 0px;
+    	box-shadow: 0px;
+    }
+</style>
+
+</h:head>
+<h:body>
+
+	<h:form id="form" enctype="multipart/form-data">	
+		<div class="ui-fluid">
+			<p:growl id="msgs" showDetail="true" />
+			<p:panel>
+				<p:panelGrid columns="4" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank">
+					<p:outputLabel value="Nome:" for="nome"/>
+					<p:inputText id="nome"/>
+					
+					<p:outputLabel value="Endereço:" for="endereco"/>
+					<p:inputText id="endereco"/>
+					
+					
+					<p:fileUpload value="#{uploadXml.arquivo}" 
+								  mode="simple"
+								  skinSimple="true"
+								  label="Anexar"/>
+								  
+					<p:commandButton value = "Importar..." 
+									 ajax="false"
+									 actionListener="#{uploadXml.upload}"
+									 style="width: 130px;"/>
+				</p:panelGrid>
+				<p:dataTable value="#{uploadXml.pessoas}" var="pessoa" emptyMessage="Nenhum registro..." reflow="true" style="margin-top:20px">
+						<p:column headerText="ID">
+							<h:outputText value = "#{pessoa.id}" />
+						</p:column>
+						<p:column headerText="Nome">
+							<h:outputText value = "#{pessoa.nome}" />
+						</p:column>
+						<p:column headerText="Data de Nascimento">
+							<h:outputText value="#{pessoa.dataNascimento}" />
+						</p:column>
+					</p:dataTable>
+			</p:panel>
+		</div>
+	</h:form>
+</h:body>
+</html>
